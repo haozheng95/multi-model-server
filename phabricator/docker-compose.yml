@@ -11,7 +11,7 @@ services:
     image: 'bitnami/phabricator:2019'
     ports:
       - '80:80'
-      - '7098:7098'
+      - '7098:80'
       - '7097:443'
     volumes:
       - 'phabricator_data:/bitnami'
