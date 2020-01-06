@@ -10,8 +10,8 @@ services:
   phabricator:
     image: 'bitnami/phabricator:2019'
     ports:
-      - '80:80'
-      - '443:443'
+      - '7098:80'
+      - '7097:443'
     volumes:
       - 'phabricator_data:/bitnami'
       - './vhost.conf:/opt/bitnami/apache/conf/vhosts/vhost.conf'
