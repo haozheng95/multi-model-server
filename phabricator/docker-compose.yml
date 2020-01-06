@@ -18,6 +18,13 @@ services:
       - './vhost.conf:/opt/bitnami/apache/conf/vhosts/vhost.conf'
     depends_on:
       - mariadb
+  web-nginx-aiapp-server:
+    image: nginx:1.11.6-alpine
+    restart: always
+    ports:
+      - "7096:7098"
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
 volumes:
   mariadb_data:
     driver: local
