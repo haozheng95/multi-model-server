@@ -1,0 +1,9 @@
+version: '2'
+services:
+  jira:
+    image: 'dchevell/jira-software:7.13.0'
+    ports:
+      - '8080:8080'
+    volumes:
+      - './jira-data:/var/atlassian/application-data/jira'
+      - './localtime:/etc/localtime'
