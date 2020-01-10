@@ -31,7 +31,7 @@ def lstm(site):
     param_1_path = photos.path(param_1)
     param_2_path = photos.path(param_2)
     shell = "/root/lstm/python/run.sh " + site + " " + param_1_path + " " + param_2_path
-    # output = subprocess.check_output(shell, shell=True)
+    output = subprocess.check_output(shell, shell=True)
     file_path = "/root/lstm/python/" + site + "results.csv"
 
     def generate():
