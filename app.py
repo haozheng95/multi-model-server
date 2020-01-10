@@ -12,11 +12,11 @@ import subprocess
 __mtime__ = '2020-01-03'
 
 from flask import Flask, request
-from flask_uploads import UploadSet, IMAGES, configure_uploads, ALL
+from flask_uploads import UploadSet, DATA, configure_uploads, ALL
 
 app = Flask(__name__)
 app.config['UPLOADED_PHOTO_DEST'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
-app.config['UPLOADED_PHOTO_ALLOW'] = ALL
+app.config['UPLOADED_PHOTO_ALLOW'] = DATA
 
 photos = UploadSet('PHOTO')
 
