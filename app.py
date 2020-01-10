@@ -39,7 +39,7 @@ def lstm(site):
             raise ("File not found.")
         with open(file_path, "rb") as f:
             while True:
-                chunk = f.read(chunk_size=10 * 1024 * 1024)
+                chunk = f.read()
                 if not chunk:
                     break
                 yield chunk
