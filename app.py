@@ -6,18 +6,31 @@
 @file: app.py
 @time: 2020-01-03 16:23
 """
+import os
 import subprocess
 
 __mtime__ = '2020-01-03'
 
-from flask import Flask
+from flask import Flask, request
+from flask_uploads import UploadSet, IMAGES, configure_uploads, ALL
 
 app = Flask(__name__)
+app.config['UPLOADED_PHOTO_DEST'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+app.config['UPLOADED_PHOTO_ALLOW'] = ALL
+
+photos = UploadSet('PHOTO')
+
+configure_uploads(app, photos)
 
 
-@app.route("/lstm", methods=["POST"])
-def lstm():
-    shell = "python /root/lstm/python/main.py 0 12"
+@app.route("/lstm/<site>", methods=["POST"])
+def lstm(site):
+    # shell = "python /root/lstm/python/main.py 0 12"
+    param_1 = photos.save(request.files['param_1'])
+    param_2 = photos.save(request.files['param_2'])
+    param_1_path = photos.path(param_1)
+    param_2_path = photos.path(param_2)
+    shell = "/root/lstm/python/runs.sh " + site + " " + param_1_path + " " + param_2_path
     output = subprocess.check_output(shell, shell=True)
     return output
 
