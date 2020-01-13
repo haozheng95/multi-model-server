@@ -13,6 +13,7 @@ __mtime__ = '2020-01-13'
 
 
 def hold_process(popen, site):
+    print(popen.args)
     with open("tmp/" + site, "w") as f:
         f.write(str(popen.pid))
 
