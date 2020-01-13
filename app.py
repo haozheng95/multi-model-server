@@ -33,7 +33,6 @@ def lstm(site):
     param_1_path = photos.path(param_1)
     param_2_path = photos.path(param_2)
     shell = BaseShell + " -p " + site + " " + param_1_path + " " + param_2_path
-    shell = "ls"
     # output = subprocess.check_output(shell, shell=True)
     output = subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
     process_tools.hold_process(output, site)

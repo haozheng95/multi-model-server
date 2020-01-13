@@ -17,7 +17,7 @@ def hold_process(output, site):
     # print("shell")
     # output = subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
     with open("tmp/" + site, "w") as f:
-        f.write(output.pid)
+        f.write(str(output.pid))
 
 
 def kill_process(site):
