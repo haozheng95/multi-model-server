@@ -59,7 +59,7 @@ def reset(site):
     ok, msg = error_tools.check_command_stdout(output)
     if ok is False:
         return msg
-    return "success"
+    return "Success"
 
 
 if __name__ == '__main__':
