@@ -35,7 +35,7 @@ def lstm(site):
     shell = BaseShell + " -p " + site + " " + param_1_path + " " + param_2_path
     # output = subprocess.check_output(shell, shell=True)
     output = subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
-    process_tools.hold_process(site, shell)
+    process_tools.hold_process(output, site)
     ok, msg = error_tools.check_command_stdout(output.stdout.read())
     if ok is False:
         return msg

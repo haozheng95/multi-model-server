@@ -12,21 +12,19 @@ import subprocess
 __mtime__ = '2020-01-13'
 
 
-def hold_process(site, shell):
-    shell = "ps -ef | grep '" + shell + "' | grep -v grep | awk '{print $2}'"
-    print("shell")
-    exit()
-    output = subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
+def hold_process(output, site):
+    # shell = "ps -ef | grep '" + shell + "' | grep -v grep | awk '{print $2}'"
+    # print("shell")
+    # output = subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
     with open("tmp/" + site, "w") as f:
-        f.write(output.stdout.read().decode("utf-8"))
+        f.write(output.pid)
 
 
 def kill_process(site):
     with open("tmp/" + site, "r") as f:
-        file = f.read()
-    for pid in file.split("\n"):
-        shell = "sudo kill -9 " + str(pid)
-        # shell = "./kill.sh " + str(pid)
-        print("kill shell ---> ", shell)
-        subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
+        pid = f.read()
+    # for pid in file.split("\n"):
+    shell = "sudo kill -9 " + str(int(pid) + 2)
+    print("kill shell ---> ", shell)
+    subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
     os.remove("tmp/" + site)
