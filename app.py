@@ -32,6 +32,7 @@ def lstm(site):
     param_2_path = photos.path(param_2)
     shell = "/root/lstm/python/run.sh " + site + " " + param_1_path + " " + param_2_path
     output = subprocess.check_output(shell, shell=True)
+    output = output.decode("utf-8")
     split = output.split("\n")
     i = 0
     for row in split:
