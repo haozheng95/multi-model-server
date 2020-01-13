@@ -20,7 +20,7 @@ def hold_process(popen, site):
 def kill_process(site):
     with open("tmp/" + site, "r") as f:
         pid = f.read()
-    shell = "kill -9 " + str(pid)
+    shell = "sudo kill -9 " + str(pid)
     print("kill shell ---> ", shell)
     subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
     os.remove("tmp/" + site)
