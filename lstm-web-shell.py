@@ -22,19 +22,18 @@ def run():
         shell = "curl -o result.csv -X GET " + BaseUrl + "/reset/" + site
 
     elif operation == '-prediction' or operation == '-p':
-        param_1 = sys.argv[2]
-        param_2 = sys.argv[3]
-        site = sys.argv[4]
+        param_1 = sys.argv[3]
+        param_2 = sys.argv[4]
+        site = sys.argv[2]
         shell = "curl -o result.csv -X POST  -F 'param_1=@" + param_1 + "' -F 'param_2=@" + param_2 + "' " + BaseUrl + "/lstm/" + site
         print(shell)
         print("param_1=", param_1)
         print("param_2=", param_2)
         print("site   =", site)
 
-
     else:
         print('Error 2')
-        print('Unknow operation', operation)
+        print('Unknow operation ', operation)
         exit(1)
     subprocess.check_output(shell, shell=True)
     with open("result.csv", "r") as file:
@@ -47,4 +46,11 @@ def run():
 
 
 if __name__ == '__main__':
-    run()
+    try:
+
+        run()
+    except KeyboardInterrupt:
+        site = sys.argv[2]
+        shell = "curl -X GET " + BaseUrl + "/kill/" + site
+        subprocess.check_output(shell, shell=True)
+        print("kill :", site)

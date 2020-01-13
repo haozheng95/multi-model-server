@@ -13,7 +13,7 @@ __mtime__ = '2020-01-03'
 
 from flask import Flask, request, Response
 from flask_uploads import UploadSet, DATA, configure_uploads, ALL
-from tools import error_tools
+from tools import error_tools, process_tools
 
 app = Flask(__name__)
 app.config['UPLOADED_PHOTO_DEST'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
@@ -32,8 +32,10 @@ def lstm(site):
     param_1_path = photos.path(param_1)
     param_2_path = photos.path(param_2)
     shell = BaseShell + " -p " + site + " " + param_1_path + " " + param_2_path
-    output = subprocess.check_output(shell, shell=True)
-    ok, msg = error_tools.check_command_stdout(output)
+    # output = subprocess.check_output(shell, shell=True)
+    output = subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
+    process_tools.hold_process(output, site)
+    ok, msg = error_tools.check_command_stdout(output.stdout.read())
     if ok is False:
         return msg
 
@@ -60,6 +62,12 @@ def reset(site):
     if ok is False:
         return msg
     return "Success"
+
+
+@app.route("/kill/<site>", methods=["GET"])
+def kill(site):
+    process_tools.kill_process(site)
+    return "Kill Success"
 
 
 if __name__ == '__main__':
