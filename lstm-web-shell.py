@@ -55,5 +55,5 @@ if __name__ == '__main__':
         shell = "curl -X GET " + "http://47.105.165.164:7088" + "/kill/" + site
         print(shell)
         subprocess.check_output(shell, shell=True)
-        time.sleep(3)
+        # time.sleep(3)
         print("kill :", site)
