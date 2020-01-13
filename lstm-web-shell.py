@@ -19,7 +19,7 @@ def run():
     shell = ""
     if operation == '-reset' or operation == '-r':
         site = sys.argv[2]
-        shell = "curl -o result.csv -X GET   " + BaseUrl + "/reset/" + site
+        shell = "curl -o result.csv -X GET " + BaseUrl + "/reset/" + site
 
     elif operation == '-prediction' or operation == '-p':
         param_1 = sys.argv[2]
@@ -30,11 +30,20 @@ def run():
         print("param_1=", param_1)
         print("param_2=", param_2)
         print("site   =", site)
+
+
     else:
         print('Error 2')
         print('Unknow operation', operation)
         exit(1)
     subprocess.check_output(shell, shell=True)
+    with open("result.csv", "r") as file:
+        for line in file.readlines():
+            if line.startswith("Error"):
+                print(line)
+            elif line.startswith("Success"):
+                print(line)
+            return
 
 
 if __name__ == '__main__':

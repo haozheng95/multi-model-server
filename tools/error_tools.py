@@ -16,6 +16,6 @@ def check_command_stdout(command_stdout):
     i = 0
     for row in split:
         if "Error" in row:
-            return False, row + split[i + 1]
+            return False, row + " : " + split[i + 1]
         i += 1
     return True, None
