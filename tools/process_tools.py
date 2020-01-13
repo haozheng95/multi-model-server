@@ -22,5 +22,6 @@ def kill_process(site):
         pid = f.read()
     shell = "sudo kill -9 " + str(pid)
     print("kill shell ---> ", shell)
-    subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
+    # subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
+    os.system(shell)
     os.remove("tmp/" + site)
