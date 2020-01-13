@@ -13,7 +13,6 @@ __mtime__ = '2020-01-13'
 
 
 def hold_process(popen, site):
-    print(popen.args)
     with open("tmp/" + site, "w") as f:
         f.write(str(popen.pid))
 
@@ -21,9 +20,9 @@ def hold_process(popen, site):
 def kill_process(site):
     with open("tmp/" + site, "r") as f:
         pid = f.read()
-    # shell = "sudo kill -9 " + str(pid)
-    shell = "./kill.sh " + str(pid)
+    shell = "sudo kill -9 " + str(int(pid) + 2)
+    # shell = "./kill.sh " + str(pid)
     print("kill shell ---> ", shell)
-    # subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
+    subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
     os.system(shell)
     os.remove("tmp/" + site)
