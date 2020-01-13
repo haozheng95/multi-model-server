@@ -8,6 +8,7 @@
 """
 import subprocess
 import sys
+import time
 
 __mtime__ = '2020-01-10'
 
@@ -51,7 +52,8 @@ if __name__ == '__main__':
         run()
     except KeyboardInterrupt:
         site = sys.argv[2]
-        shell = "curl -X GET " + BaseUrl + "/kill/" + site
+        shell = "curl -X GET " + "http://47.105.165.164:7088" + "/kill/" + site
         print(shell)
         subprocess.check_output(shell, shell=True)
+        time.sleep(3)
         print("kill :", site)
