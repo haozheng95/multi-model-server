@@ -37,7 +37,7 @@ def lstm(site):
     i = 0
     for row in split:
         print("---------", row)
-        if "Error 1" in row:
+        if "Error" in row:
             return split[i + 1]
         i += 1
 
