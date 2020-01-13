@@ -12,9 +12,11 @@ import subprocess
 __mtime__ = '2020-01-13'
 
 
-def hold_process(popen, site):
+def hold_process(site, shell):
+    shell = "ps -ef | grep '" + shell + "' | grep -v grep | awk '{print $2}'"
+    output = subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
     with open("tmp/" + site, "w") as f:
-        f.write(str(popen.pid))
+        f.write(output.stdout.read().decode("utf-8"))
 
 
 def kill_process(site):
