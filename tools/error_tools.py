@@ -18,4 +18,4 @@ def check_command_stdout(command_stdout):
         if "Error" in row:
             return False, row + split[i + 1]
         i += 1
-    return True,
+    return True, None
