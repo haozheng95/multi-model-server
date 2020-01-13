@@ -52,5 +52,6 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         site = sys.argv[2]
         shell = "curl -X GET " + BaseUrl + "/kill/" + site
+        print(shell)
         subprocess.check_output(shell, shell=True)
         print("kill :", site)
