@@ -8,6 +8,7 @@
 """
 import os
 import subprocess
+import sys
 
 __mtime__ = '2020-01-03'
 
@@ -71,4 +72,7 @@ def kill(site):
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', threaded=False)
+    port = 7089
+    if len(sys.argv) > 1:
+        port = sys.argv[1]
+    app.run(debug=False, host='0.0.0.0', port=port, threaded=False)
