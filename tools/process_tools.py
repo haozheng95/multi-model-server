@@ -14,6 +14,8 @@ __mtime__ = '2020-01-13'
 
 def hold_process(site, shell):
     shell = "ps -ef | grep '" + shell + "' | grep -v grep | awk '{print $2}'"
+    print("shell")
+    exit()
     output = subprocess.Popen(shell, shell=True, stdout=subprocess.PIPE)
     with open("tmp/" + site, "w") as f:
         f.write(output.stdout.read().decode("utf-8"))
